@@ -45,3 +45,12 @@ Appointment es una API desarrollada en Laravel 11 para la gestión eficiente de 
    ```bash
    git clone https://github.com/tuusuario/appointment-api.git
    cd appointment-api
+   composer install
+   php artisan migrate
+   
+## Inicializar servidor
+ ```bash
+php artisan serve
+
+
+
