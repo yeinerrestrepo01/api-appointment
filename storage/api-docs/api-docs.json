@@ -1,0 +1,337 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "AppointMent API",
+        "description": "Api para la gestion y solcitud de citas medicas",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api/appointments": {
+            "get": {
+                "tags": [
+                    "appointments"
+                ],
+                "summary": "Retorna el listado de citas",
+                "operationId": "0a24485c0ed636e135151660b0eb701a",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AppointmentResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "appointments"
+                ],
+                "summary": "Realiza la creación de un registro de cita",
+                "operationId": "d19bc89ae46957de19d7e7599074bf2b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "patient_name",
+                                    "doctor_name",
+                                    "appointment_date",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "patient_name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "doctor_name": {
+                                        "type": "string",
+                                        "example": "Dr. Smith"
+                                    },
+                                    "appointment_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-08-08T10:00:00Z"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "scheduled"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registro creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid input data"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/appointments/{id}": {
+            "get": {
+                "tags": [
+                    "appointments"
+                ],
+                "summary": "Retorna la información relacionada a una cita según su ID",
+                "operationId": "5bd4a569bd13d8f3215c0c1be9ad060e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la cita",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cita no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cita no encontrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "appointments"
+                ],
+                "summary": "Actualiza la información de una cita según su ID",
+                "operationId": "85224e739e623a4e0e574e2db1f44c71",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la cita",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "patient_name",
+                                    "doctor_name",
+                                    "appointment_date"
+                                ],
+                                "properties": {
+                                    "patient_name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "doctor_name": {
+                                        "type": "string",
+                                        "example": "Dr. Smith"
+                                    },
+                                    "appointment_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-08-08T10:00:00Z"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cita actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cita no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cita no encontrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Datos incorrectos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Datos de entrada inválidos"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "appointments"
+                ],
+                "summary": "Elimina una cita según su ID",
+                "operationId": "381a36df950b699f10ed229a7ce69c2e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la cita",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cita cancelada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cita cancelada correctamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cita no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cita no encontrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AppointmentResource": {
+                "properties": {
+                    "id": {
+                        "description": "Identificador de cita",
+                        "type": "intger"
+                    },
+                    "patient_name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "doctor_name": {
+                        "description": "Nombre de medico",
+                        "type": "string"
+                    },
+                    "appointment_date": {
+                        "description": "fecha de cita",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "description": "estado de cita",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "appointments",
+            "description": "appointments"
+        }
+    ]
+}

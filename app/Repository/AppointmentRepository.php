@@ -14,7 +14,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 
     public function getById($id)
     {
-        return Appointment::fineOrFail($id);
+        return Appointment::findOrFail($id);
     }
 
     public function store(array $appointment)
