@@ -8,9 +8,9 @@ interface AppointmentRepositoryInterface
 
     public function getById($id);
 
-    public function store($appointment);
+    public function store(array $appointment);
 
-    public function update($id, $appointment);
+    public function update(array $appointment, $id);
 
     public function delete($id);
 }

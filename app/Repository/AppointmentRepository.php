@@ -17,12 +17,12 @@ class AppointmentRepository implements AppointmentRepositoryInterface
         return Appointment::fineOrFail($id);
     }
 
-    public function store($appointment)
+    public function store(array $appointment)
     {
         return Appointment::create($appointment);
     }
 
-    public function update($id, $appointment)
+    public function update(array $appointment, $id)
     {
         return Appointment::whereId($id)->Update($appointment);
     }
