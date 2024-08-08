@@ -26,11 +26,12 @@ class StoreAppointmentRequest extends FormRequest
         return [
             'patient_name' => 'required|string|max:100',
             'doctor_name' => 'required|string|',
-            'appointment_date' => 'required|datetime|',
+            'appointment_date' => 'required|date_format:Y-m-d H:i:s',
+            'status' => 'required|string|'
         ];
     }
 
-    public function failedValidations(Validator $validator)
+    public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(
             [

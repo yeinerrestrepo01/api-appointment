@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('patient_name');
             $table->string('doctor_name');
             $table->dateTime('appointment_date');
-            $table->string('status')->nullable();;
+            $table->string('status')->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

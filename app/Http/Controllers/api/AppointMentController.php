@@ -39,16 +39,16 @@ class AppointMentController extends Controller
             'patient_name' => $request->patient_name,
             'doctor_name' => $request->doctor_name,
             'appointment_date' => $request->appointment_date,
-            'status' => 'scheduled',
+            'status' => $request->status,
         ];
         DB::beginTransaction();
         try {
             $appointment = $this->appointmentRepositoryInterface->store($data);
             DB::commit();
-            return ApiResponseHelper::sendResponse(new AppointmentResource($appointment, 'Cita creada exitosamente', 201));
+            return ApiResponseHelper::sendResponse(new AppointmentResource($appointment), 'Cita creada exitosamente', 201);
         } catch (\Exception $ex) {
             DB::rollBack();
-            return ApiResponseHelper::rollback($ex);
+            return ApiResponseHelper::rollback($ex, $ex->getMessage());
         }
     }
 
@@ -59,13 +59,12 @@ class AppointMentController extends Controller
             'patient_name' => $request->patient_name,
             'doctor_name' => $request->doctor_name,
             'appointment_date' => $request->appointment_date,
-            'status' => 'scheduled',
         ];
         DB::beginTransaction();
         try {
             $this->appointmentRepositoryInterface->update($data, $id,);
             DB::commit();
-            return ApiResponseHelper::sendResponse(new AppointmentResource(null, 'Cita actualizada exitosamente', 200));
+            return ApiResponseHelper::sendResponse(new AppointmentResource(null), 'Cita actualizada exitosamente', 200);
         } catch (\Exception $ex) {
             DB::rollBack();
             return ApiResponseHelper::rollback($ex);

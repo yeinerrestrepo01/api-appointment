@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class ApiResponseHelper
 {
-    public static function rollback($e, $message = 'proceso fallido')
+    public static function rollback($ex, $message = 'proceso fallido')
     {
 
         DB::rollback();
-        self::throw($e, $message);
+        self::throw($ex, $message);
     }
 
     public static function throw($e, $message = 'proceso fallido')
