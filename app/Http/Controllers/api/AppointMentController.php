@@ -185,16 +185,26 @@ class AppointMentController extends Controller
 
     public function update(UpdateAppointmentRequest $request, string $id)
     {
+        $appointment = $this->appointmentRepositoryInterface->getById($id);
+
+        if (!$appointment) {
+            return ApiResponseHelper::sendResponse(null, 'Cita no encontrada', 404);
+        }
+
+        // Datos para la actualización
         $data = [
             'patient_name' => $request->patient_name,
             'doctor_name' => $request->doctor_name,
             'appointment_date' => $request->appointment_date,
+            'status' => $request->status,
         ];
+
         DB::beginTransaction();
         try {
-            $this->appointmentRepositoryInterface->update($data, $id,);
+            $this->appointmentRepositoryInterface->update($data, $id);
             DB::commit();
-            return ApiResponseHelper::sendResponse(new AppointmentResource(null), 'Cita actualizada exitosamente', 200);
+
+            return ApiResponseHelper::sendResponse(new AppointmentResource($appointment), 'Cita actualizada exitosamente', 200);
         } catch (\Exception $ex) {
             DB::rollBack();
             return ApiResponseHelper::rollback($ex, $ex->getMessage());
@@ -235,6 +245,13 @@ class AppointMentController extends Controller
 
     public function destroy(string $id)
     {
+        $appointment = $this->appointmentRepositoryInterface->getById($id);
+
+        if (!$appointment) {
+            // Si no se encuentra la cita, devolver una respuesta de error
+            return ApiResponseHelper::sendResponse(null, 'Cita no encontrada', 404);
+        }
+
         $appointment = $this->appointmentRepositoryInterface->delete($id);
         return ApiResponseHelper::sendResponse(null, 'cita cancelada correctamente', 200);
     }
