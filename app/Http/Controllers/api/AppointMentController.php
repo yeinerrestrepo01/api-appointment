@@ -245,13 +245,6 @@ class AppointMentController extends Controller
 
     public function destroy(string $id)
     {
-        $appointment = $this->appointmentRepositoryInterface->getById($id);
-
-        if (!$appointment) {
-            // Si no se encuentra la cita, devolver una respuesta de error
-            return ApiResponseHelper::sendResponse(null, 'Cita no encontrada', 404);
-        }
-
         $appointment = $this->appointmentRepositoryInterface->delete($id);
         return ApiResponseHelper::sendResponse(null, 'cita cancelada correctamente', 200);
     }
