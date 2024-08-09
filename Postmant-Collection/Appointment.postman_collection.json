@@ -119,14 +119,7 @@
 			"name": "GetAll",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "3|Na74RRmqvjXY2wVtZJu9HATz0M0u5ckzZyuzmmb7b6b9a9fb",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [
@@ -277,6 +270,55 @@
 						"api",
 						"appointments",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|rbM4qqHBqFgINyvUiX3rY6RtxSnSGT1SUCiaVUK1f36da395",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patient_name\": \"John Doe\",\r\n    \"doctor_name\": \"Dr. Jose\",\r\n    \"appointment_date\": \"2024-08-09 14:30:00\",\r\n    \"status\": \"scheduled\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/appointments/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"appointments",
+						"2"
 					]
 				}
 			},
