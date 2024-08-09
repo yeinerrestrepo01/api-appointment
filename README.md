@@ -47,10 +47,14 @@ Appointment es una API desarrollada en Laravel 11 para la gestión eficiente de 
    cd appointment-api
    composer install
    php artisan migrate
-   
-## Inicializar servidor
- ```bash
-php artisan serve
+## Ejecucion de aplicacion
+  php artisan serve
 
+## Uso
+1. **Creacion de usuarios:**
+      ```bash
+      POST http://127.0.0.1:8000/api/register
 
-
+2. **Login:**
+   ```bash
+   POST http://127.0.0.1:8000/api/login
