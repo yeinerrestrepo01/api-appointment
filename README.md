@@ -56,4 +56,5 @@ en la carpeta: Postmant-Collection se encuntran las colecciones de pruebas del p
    ```bash
    Login de usuario POST http://127.0.0.1:8000/api/login
    Registro de usuarios POST http://127.0.0.1:8000/api/register
+   UrlSwagger: http://localhost:8000/api/documentation#
 
