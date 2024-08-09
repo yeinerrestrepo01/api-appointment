@@ -51,7 +51,7 @@ Appointment es una API desarrollada en Laravel 11 para la gestión eficiente de 
   php artisan serve
 
 ## Uso
-en la carpeta: Postmant-Collection se encuntran las colecciones de pruebas del proyecto
+en la carpeta: Postmant-Collection se encuntran las colecciones de pruebas del proyecto, tener en cuenta que se debe realizar la creacion de un usuario antes de utilizar la aplicaicon para poder obtener un token de acceso, a continuacion se relacionan los metodos para realizar esa configuracion inicial:
 **Endpoint:**
    ```bash
    Login de usuario POST http://127.0.0.1:8000/api/login
